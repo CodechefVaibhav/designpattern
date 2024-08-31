@@ -1,6 +1,9 @@
-package com.design.pattern.creational.builder.improved.model;
+package com.design.pattern.creational.builder.improved.service;
 
 import org.springframework.stereotype.Service;
+
+import com.design.pattern.creational.builder.improved.model.ProductImproved;
+import com.design.pattern.creational.builder.improved.model.ProductImproved.ProductImprovedBuilder;
 
 /**
  * @author vaibhav.kashyap

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.design.pattern.creational.builder.improved.model.ProductImproved;
-import com.design.pattern.creational.builder.improved.model.ProductImprovedService;
+import com.design.pattern.creational.builder.improved.service.ProductImprovedService;
 
 /**
  * @author vaibhav.kashyap
