@@ -6,6 +6,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.design.pattern.structural.adapter.improved.service.PaymentAdapter;
 
+/**
+ * @author vaibhav.kashyap
+ * */
+
 @RestController
 public class PaymentImprovedController {
 
