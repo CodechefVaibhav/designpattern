@@ -4,26 +4,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.design.pattern.structural.adapter.improved.service.PaymentAdapter;
+import com.design.pattern.structural.adapter.improved.service.PaymentImprovedProcessor;
 
 /**
  * @author vaibhav.kashyap
- * */
+ */
 
 @RestController
 public class PaymentImprovedController {
 
-	private final PaymentAdapter paymentAdapter;
+	private final PaymentImprovedProcessor paymentProcessor;
 
-	// Constructor injection with Adapter
-	public PaymentImprovedController(PaymentAdapter paymentAdapter) {
-		this.paymentAdapter = paymentAdapter;
+	// Constructor Injection of the payment processor (could be any implementation)
+	public PaymentImprovedController(PaymentImprovedProcessor paymentProcessor) {
+		this.paymentProcessor = paymentProcessor;
 	}
 
-	// Endpoint for processing payments
-	@GetMapping("/pay")
-	public String processPayment(@RequestParam String paymentType, @RequestParam String paymentProvider,
-			@RequestParam double amount) {
-		return paymentAdapter.process(paymentType, paymentProvider, amount);
+	@GetMapping("/processPayment")
+	public String processPayment(@RequestParam String details) {
+		paymentProcessor.processPayment(details);
+		return "Payment processed.";
 	}
 }

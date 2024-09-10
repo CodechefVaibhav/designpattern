@@ -4,7 +4,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.design.pattern.structural.adapter.defective.service.PaymentDefectiveService;
+import com.design.pattern.structural.adapter.defective.service.LegacyPaymentDefectiveService;
+import com.design.pattern.structural.adapter.defective.service.ModernPaymentDefectiveService;
 
 /**
  * @author vaibhav.kashyap
@@ -13,17 +14,25 @@ import com.design.pattern.structural.adapter.defective.service.PaymentDefectiveS
 @RestController
 public class PaymentDefectiveController {
 
-	private final PaymentDefectiveService paymentService;
+	private final LegacyPaymentDefectiveService legacyPaymentService;
+	private final ModernPaymentDefectiveService modernPaymentService;
 
-	// Constructor injection
-	public PaymentDefectiveController(PaymentDefectiveService paymentService) {
-		this.paymentService = paymentService;
+	// Constructor Injection of both services
+	public PaymentDefectiveController(LegacyPaymentDefectiveService legacyPaymentService,
+			ModernPaymentDefectiveService modernPaymentService) {
+		this.legacyPaymentService = legacyPaymentService;
+		this.modernPaymentService = modernPaymentService;
 	}
 
-	// Defective implementation: Directly using PaymentService without flexibility
-	// to switch payment processors
-	@GetMapping("/pay")
-	public String processPayment(@RequestParam String paymentType, @RequestParam double amount) {
-		return paymentService.processPayment(paymentType, amount);
+	@GetMapping("/processLegacyPayment")
+	public String processLegacyPayment(@RequestParam String details) {
+		legacyPaymentService.processLegacyPayment(details);
+		return "Legacy payment processed.";
+	}
+
+	@GetMapping("/processModernPayment")
+	public String processModernPayment(@RequestParam String details) {
+		modernPaymentService.processPayment(details);
+		return "Modern payment processed.";
 	}
 }
